@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OmniSeg Pro · Multi-Domain Computer Vision &amp; Spatial Analytics Engine</title>
+  <meta name="description" content="OmniSeg Pro: Enterprise-grade real-world image segmentation suite for medical, traffic, agriculture, industrial QC, and aerial analytics."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ── Navbar ─────────────────────────────────────────────────────── -->
+<nav class="navbar">
+  <div class="nav-brand">
+    <div class="nav-logo">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 17L12 22L22 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 12L12 17L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="nav-title">OmniSeg <span class="badge-pro">PRO</span></div>
+      <div class="nav-sub">Spatial Analytics &amp; Computer Vision Engine</div>
+    </div>
+  </div>
+  <div class="nav-right">
+    <span class="nav-mode-label" id="nav-mode-label">Select Domain</span>
+    <div class="nav-status">
+      <span class="status-dot" id="status-dot"></span>
+      <span id="status-text">Ready</span>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero ──────────────────────────────────────────────────────── -->
+<header class="hero">
+  <div class="hero-badge">Enterprise Spatial Intelligence · CV-Lab AI-23</div>
+  <h1 class="hero-title">
+    Multi-Domain <span class="gradient-text">Image Segmentation</span> &amp;<br/>Spatial Analytics Suite
+  </h1>
+  <p class="hero-subtitle">
+    An industrial-grade computer vision suite applying specialized OpenCV pipelines for automated spatial measurement, object tracking, anomaly detection, and classification.
+  </p>
+</header>
+
+<!-- ── Domain Cards ───────────────────────────────────────────────── -->
+<section class="domain-section">
+  <div class="domain-grid">
+    <div class="domain-card" id="card-medical" onclick="selectDomain('medical')" data-domain="medical">
+      <div class="domain-card-glow"></div>
+      <div class="domain-card-icon">🏥</div>
+      <div class="domain-card-title">Medical Imaging</div>
+      <div class="domain-card-desc">Wound &amp; lesion boundary detection, area measurement in mm², severity classification</div>
+      <div class="domain-card-tags"><span>Contours</span><span>Morphology</span><span>Spatial Measurement</span></div>
+    </div>
+    <div class="domain-card" id="card-traffic" onclick="selectDomain('traffic')" data-domain="traffic">
+      <div class="domain-card-glow"></div>
+      <div class="domain-card-icon">🚗</div>
+      <div class="domain-card-title">Traffic &amp; Infrastructure</div>
+      <div class="domain-card-desc">Lane line tracking via Hough Transform, vehicle spatial profiling, and safety zone alerts</div>
+      <div class="domain-card-tags"><span>Hough Lines</span><span>Watershed</span><span>Proximity ROI</span></div>
+    </div>
+    <div class="domain-card" id="card-agriculture" onclick="selectDomain('agriculture')" data-domain="agriculture">
+      <div class="domain-card-glow"></div>
+      <div class="domain-card-icon">🌿</div>
+      <div class="domain-card-title">Precision Agriculture</div>
+      <div class="domain-card-desc">Vegetation index mapping (ExG), crop disease footprinting, and canopy health scoring</div>
+      <div class="domain-card-tags"><span>ExG Index</span><span>K-Means</span><span>Pathology Map</span></div>
+    </div>
+    <div class="domain-card" id="card-industrial" onclick="selectDomain('industrial')" data-domain="industrial">
+      <div class="domain-card-glow"></div>
+      <div class="domain-card-icon">🏭</div>
+      <div class="domain-card-title">Industrial Quality Control</div>
+      <div class="domain-card-desc">Surface defect mapping — cracks, pits, micro-scratches — with real-time QA PASS/FAIL verdict</div>
+      <div class="domain-card-tags"><span>Adaptive Thresh</span><span>Defect Profiling</span><span>QC Analytics</span></div>
+    </div>
+    <div class="domain-card" id="card-aerial" onclick="selectDomain('aerial')" data-domain="aerial">
+      <div class="domain-card-glow"></div>
+      <div class="domain-card-icon">🛰️</div>
+      <div class="domain-card-title">Aerial &amp; Land Cover</div>
+      <div class="domain-card-desc">Land-use classification — water, green canopy, urban structures — with dense coverage stats</div>
+      <div class="domain-card-tags"><span>HSV Classification</span><span>Color Clustering</span><span>GIS Analytics</span></div>
+    </div>
+    <div class="domain-card" id="card-classical" onclick="selectDomain('classical')" data-domain="classical">
+      <div class="domain-card-glow"></div>
+      <div class="domain-card-icon">🔬</div>
+      <div class="domain-card-title">Classical Benchmarks</div>
+      <div class="domain-card-desc">Compare classical algorithms side-by-side: Otsu, Contours, Watershed, K-Means, and SLIC Superpixels</div>
+      <div class="domain-card-tags"><span>Otsu</span><span>Contours</span><span>Superpixels</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Workspace ───────────────────────────────────────────────────── -->
+<main class="workspace" id="workspace" style="display:none">
+
+  <!-- Left: Input Controls -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-icon" id="sidebar-icon">🏥</div>
+      <div>
+        <div class="sidebar-title" id="sidebar-title">Domain Config</div>
+        <div class="sidebar-subtitle" id="sidebar-subtitle">Configure parameters and inputs</div>
+      </div>
+    </div>
+
+    <!-- Upload Zone -->
+    <div class="upload-zone" id="upload-zone" onclick="document.getElementById('file-input').click()">
+      <div class="upload-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="17 8 12 3 7 8"/>
+          <line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+      </div>
+      <div class="upload-text">Upload Source Image</div>
+      <div class="upload-hint">Drag &amp; drop or click (PNG, JPG, BMP)</div>
+      <input type="file" id="file-input" accept="image/*" style="display:none" onchange="onUpload(event)"/>
+    </div>
+
+    <div class="divider-text">OR</div>
+
+    <button class="btn-sample" id="load-sample-btn" onclick="loadDomainSample()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+        <circle cx="8.5" cy="8.5" r="1.5"/>
+        <polyline points="21 15 16 10 5 21"/>
+      </svg> Load High-Fidelity Sample
+    </button>
+
+    <!-- Preview -->
+    <div id="preview-wrap" style="display:none">
+      <div class="preview-title">Source Preview</div>
+      <img class="preview-img" id="preview-img" alt="Input Preview"/>
+      <div class="preview-meta" id="preview-meta"></div>
+    </div>
+
+    <!-- Domain controls (injected per-domain) -->
+    <div class="domain-controls" id="domain-controls"></div>
+
+    <!-- Analyse button -->
+    <button class="btn-analyse" id="analyse-btn" style="display:none" onclick="runDomain()">
+      <span id="analyse-icon">⚡</span> <span id="analyse-label">Execute Pipeline</span>
+    </button>
+
+    <!-- Summary card -->
+    <div class="summary-card" id="summary-card" style="display:none">
+      <div class="summary-title">Spatial Analysis Summary</div>
+      <div class="summary-text" id="summary-text"></div>
+    </div>
+
+    <!-- Metrics -->
+    <div class="metrics-list" id="metrics-list"></div>
+  </aside>
+
+  <!-- Right: Results & Visualization -->
+  <div class="results-area">
+
+    <!-- Results header -->
+    <div class="results-header">
+      <h2 class="results-title" id="results-title">Pipeline Output Visualization</h2>
+      <div class="results-tabs" id="results-tabs"></div>
+    </div>
+
+    <!-- Image grid -->
+    <div class="results-grid" id="results-grid">
+      <div class="empty-state">
+        <div class="empty-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+        </div>
+        <div class="empty-text">Load an image and click Execute Pipeline to render segmented maps</div>
+      </div>
+    </div>
+
+    <!-- Domain-specific table/chart panel -->
+    <div class="data-panel" id="data-panel"></div>
+
+  </div>
+</main>
+
+<!-- ── Classical tab panel (hidden until classical mode) ─────────────── -->
+<div id="classical-tabs-panel" style="display:none"></div>
+
+<!-- ── Modal ─────────────────────────────────────────────────────────── -->
+<div class="modal-bg" id="modal-bg" onclick="closeModal()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <img class="modal-img" id="modal-img" alt="High Resolution Analysis Map"/>
+    <div class="modal-cap" id="modal-cap"></div>
+  </div>
+</div>
+
+<footer class="footer">
+  OmniSeg Pro Spatial Analytics Engine &middot; Computer Vision Lab AI-23 &middot; Powered by OpenCV &amp; Flask
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
